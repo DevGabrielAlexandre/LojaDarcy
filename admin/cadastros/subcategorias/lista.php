@@ -19,4 +19,35 @@
         echo '</tr>';
       }
     ?>
+
+    
+<script>
+    $( document ).ready(function() {
+
+      $(".btnExcluir").click(function(){
+         var codigo = $(this).parent().parent().find("#id_categoria").val();
+      
+        if (confirm("Deseja realmente remover está categoria") == true) {
+          //Aqui vamos programar o que será feito se realmente quiser excluir
+            $.post("cadastros/subcategorias/excluir.php",{id:codigo},
+            function(retorno){
+              $("#Lista").load("cadastros/subcategorias/lista.php");
+              alert("Categoria Removida com sucesso!");  
+          })          
+        }
+      })  
+      
+      $(".btnAlterar").click(function(){
+        var codigo = $(this).parent().parent().find("#id_categoria").val();
+        var categoria = $(this).parent().parent().find("td:eq(0)").text();
+        $("#alterando").val(1);	
+        $("#id_alterar").val(codigo);	
+        $("#txtCategoria").val(categoria);
+      })
+
+
+
+
+   });
+</script>
 </table>
